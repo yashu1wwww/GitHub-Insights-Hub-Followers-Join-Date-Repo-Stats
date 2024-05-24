@@ -1,6 +1,6 @@
 # GitHub-Repository-Upload-Date-Finder
 
-GitHub Repository Upload Date Finder Using Html Css &amp; Js 
+GitHub  & Gist Repository Upload Date Finder Using Html Css &amp; Js 
 
 # Search here:
 
