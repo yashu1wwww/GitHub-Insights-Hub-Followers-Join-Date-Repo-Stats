@@ -1,4 +1,4 @@
-# GitHub-Repository-Upload-Date-Finder
+# GitHub-And-Gist-Repository-Upload-Date-Finder
 
 GitHub  & Gist Repository Upload Date 
 
