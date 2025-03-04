@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ensures padding & border are included in width */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('https://rajaniraiyn.github.io/windows11/src/wallpaper/img28.webp') no-repeat center center fixed;
+    background-size: cover;
+    color: #000;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+html, body {
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+}
+
+/* Container Styling */
+.container {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(10px)) {
+    .container {
+        background: rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Input, Select, and Button Styling */
+select, input, button {
+    display: block;
+    width: 100%; /* Full width without overflow */
+    padding: 12px;
+    margin: 8px auto;
+    border-radius: 8px;
+    border: 1px solid #000;
+    text-align: center;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box; /* Ensures it does not exceed container */
+}
+
+/* Skeleton Loading Effect */
+.skeleton {
+    width: 100%;
+    height: 50px;
+    background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 8px;
+}
+
+@keyframes loading {
+    0% { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+}
+
+/* Dropdown Styling */
+select {
+    appearance: none;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border: 1px solid #000;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+h2 { background: rgba(0, 0, 255, 0.3); padding: 10px; border-radius: 10px; display: inline-block; }
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #000 30%, #333);
+    transform: scale(1.05);
+}
+
+
+
+
+/* Input Field Styling */
+input {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000;
+    transition: all 0.3s ease-in-out;
+}
+
+input:focus {
+    outline: none;
+    border-color: #000;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Button Styling */
+button {
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: rgba(0, 0, 0, 1);
+}
+
+/* Result Display */
+#result {
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.copyright {
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 6px 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+    display: inline-block;
+    text-shadow: 1px 1px 4px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+.copyright a {
+    color: #00bfff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.copyright a:hover {
+    color: #ffcc00;
+    text-decoration: underline;
+}
+
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 80%;
+        max-width: 350px;
+        padding: 15px;
+    }
+
+    select, input, button {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    input {
+        height: 40px;
+    }
+
+    button {
+        height: 45px;
+    }
+}
