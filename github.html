@@ -1,253 +1,32 @@
-<!-- Copying the code is easy, but when you create it, you have to become busy -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>GitHub Repository & Repo Upload Date Finder</title>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- favicon -->
-    <link rel="icon" href="https://github.com/favicon.ico" type="image/x-icon">
-    
-    <style>
-        html, body {
-            overflow: hidden; 
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-image: url('https://wallpaperaccess.com/full/1567770.gif');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 100vh;
-        }
-
-        .target-cursor {
-            width: 20px;
-            height: 20px;
-            background-color: transparent;
-            border: 2px solid #333;
-            border-radius: 50%;
-            position: absolute;
-            pointer-events: none;
-            animation: moveCursor 0.3s infinite alternate;
-        }
-
-        @keyframes moveCursor {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.5);
-                opacity: 0.5;
-            }
-        }
-
-        .container {
-            padding: 10px;
-            text-align: center;
-        }
-
-        h1 {
-            text-align: center;
-            margin-top: 20px;
-        }
-        input[type="text"] {
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 21px;
-            border: none;
-            margin-bottom: 0px;
-            max-width: 300px;
-            width: 100%;
-        }
-
-        button {
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 27px;
-            border: none;
-            background-color: red;
-            color: #fff;
-            cursor: pointer;
-            width: 26%;
-            max-width: 134px;
-        }
-
-        #clock-wrapper {
-            display: none;
-        }
-
-        #result-box {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin-top: 10px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 24px;
-        }
-
-        .digit {
-            display: inline-block;
-            margin-right: 5px;
-            padding: 5px;
-            background-color: #f2f2f2;
-            border: 1px solid green;
-            border-radius: 5px;
-        }
-
-        .bold-digit {
-            font-weight: bold;
-        }
-
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            border: 2px solid #333;
-            color: #333;
-            border-radius: 5px;
-        }
-
-        .button:hover {
-            background-color: #333;
-            color: #fff;
-        }
-
-        select {
-            padding: 3px;
-            font-size: 14px;
-            border-radius: 28px;
-            border: 1px solid #4b1d1d;
-            max-width: 300px;
-            width: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>GitHub Info Fetcher</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="target-cursor"></div>
     <div class="container">
-        <p align="center">
-            <img style="display: block;" src="https://readme-typing-svg.herokuapp.com?font=Montserrat&size=20&duration=5001&color=8B0000&vCenter=true&center=true&width=460&lines=WLC+TO+GITHUB+GIST;LIVE+REPO+UPLOAD;+DATE+FINDER;+HAPPY+SEARCHING....!">
-        </p>
-        <div class="buttons-container">
-            <a href="mailto:yashwanth6678@gmail.com" class="button">Contact Me</a>
-            <a href="https://github.com/yashu1wwww" class="button">GitHub Account</a>
-            <a href="https://yashwanthwebproject.netlify.app" class="button">Click Here For Web Development Projects</a>
-        </div>
-        <h4 style="display: inline-block; background-color:#8a976e30; border-radius: 10px; padding: 5px;">Copyright ® Developed By Yashawanth R</h4>
-        <br>
-        <h5 style="display: inline-block; background-color:#faffcc1a; border-radius:69px; padding: -3px;">GITHUB & GIST REPOSITORY UPLOAD DATE FINDER</h5>    
-        <form id="github-form">
-            <select id="urlType" onchange="updatePlaceholder()">
-                <option value="github">GitHub</option>
-                <option value="gist">Gist</option>
-            </select>
-            <br><br>
-            <input type="text" id="repoUrl" onkeydown="handleKeyDown(event)" placeholder="Paste Repo URL Only...">
-            <br><br>
-            <button type="button" onclick="findUploadDate()">SEARCH</button>
-        </form>
-        <div id="clock-wrapper">
-            <br>
-            <div id="result" class="digit"></div>
-        </div>
+        <h2>GitHub Info Fetcher</h2>
+
+        <select id="action">
+            <option value="followers">Get Followers & Joined Date</option>
+            <option value="repoDate">Get Repo Creation Date</option>
+            <option value="repoStats">Get Repo Stats</option>
+        </select>
+
+        <input type="text" id="input" placeholder="Enter GitHub Username or Profile URL">
+        <button id="searchButton">Search</button>
+
+<div class="copyright">© ® Developed By <a href="#">Yashawanth R</a></div>
+
+
+        <div id="result"></div>
     </div>
-<script>
-const targetCursor = document.querySelector('.target-cursor');
-document.addEventListener('mousemove', (e) => {
-    targetCursor.style.left = e.clientX + 'px';
-    targetCursor.style.top = e.clientY + 'px';
-});
 
-function handleKeyDown(event) {
-    if (event.key === 'Enter') {
-        findUploadDate();
-        event.preventDefault();
-    }
-}
-
-function updatePlaceholder() {
-    const urlType = document.getElementById('urlType').value;
-    const repoUrl = document.getElementById('repoUrl');
-    if (urlType === 'github') {
-        repoUrl.placeholder = "Paste GitHub Repo URL Only...";
-    } else if (urlType === 'gist') {
-        repoUrl.placeholder = "Paste GitHub Gist URL Only...";
-    }
-}
-
-function findUploadDate() {
-    const repoUrl = document.getElementById('repoUrl').value;
-    const urlType = document.getElementById('urlType').value;
-
-    const githubRepoPattern = /^https?:\/\/github.com\/([^\/]+)\/([^\/]+)/;
-    const githubGistPattern = /^https?:\/\/gist.github.com\/([^\/]+)\/([^\/]+)/;
-
-    let apiUrl;
-    if (urlType === 'github' && githubRepoPattern.test(repoUrl)) {
-        apiUrl = `https://api.github.com/repos${new URL(repoUrl).pathname}`;
-    } else if (urlType === 'gist' && githubGistPattern.test(repoUrl)) {
-        const parts = repoUrl.split('/');
-        const gistId = parts[parts.length - 1];
-        apiUrl = `https://api.github.com/gists/${gistId}`;
-    } else {
-        alert("Only valid GitHub repo or Gist repo URL are acceptable.");
-        return;
-    }
-
-    fetch(apiUrl)
-        .then(response => response.json())
-        .then(data => {
-            let uploadDate;
-            if (urlType === 'github') {
-                uploadDate = new Date(data.created_at);
-            } else if (urlType === 'gist') {
-                uploadDate = new Date(data.created_at);
-            }
-
-            const day = uploadDate.getDate().toString().padStart(2, '0');
-            const month = (uploadDate.getMonth() + 1).toString().padStart(2, '0');
-            const year = uploadDate.getFullYear();
-            const formattedDate = `${day}/${month}/${year}`;
-
-            const resultElement = document.getElementById('result');
-            resultElement.innerHTML = formatDigitalClock(formattedDate);
-
-            document.getElementById('clock-wrapper').style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            const resultElement = document.getElementById('result');
-            resultElement.innerHTML = 'Error fetching repository information. Please check the URL and try again.';
-        });
-}
-
-function formatDigitalClock(dateString) {
-    let formattedClock = '';
-
-    for (const char of dateString) {
-        if (char === '/') {
-            formattedClock += '<span class="digit">/</span>';
-        } else {
-            formattedClock += /\d/.test(char) ? `<span class="digit bold-digit">${char}</span>` : `<span class="digit">${char}</span>`;
-        }
-    }
-
-    return formattedClock;
-}
-</script>
-   </body>
+    <script src="script.js"></script>
+</body>
 </html>
